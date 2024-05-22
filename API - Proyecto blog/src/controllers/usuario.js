@@ -159,7 +159,7 @@ let photo = req.file.path
 };
 
 export const editarUsaurio = async (req, res) => {
-  const { user, password, email, photo } = req.body;
+  const { user, password, email } = req.body;
   let salt = 10;
   //Encriptar contraseña y validar que no se ha utilizado el email
   const usuario = await Usuario.findByPk(req.query.id);
@@ -168,9 +168,13 @@ export const editarUsaurio = async (req, res) => {
     try {
       if (password != "") {
         let val = bcrypt.hashSync(password, salt);
+        let newphoto =  req.file.path;
         usuario.password = val;
       }
-      usuario.photo = photo;
+      if(newphoto != ""){
+        usuario.photo = newphoto;
+      }
+     
       usuario.user = user;
       usuario.email = email;
       await usuario.save();

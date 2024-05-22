@@ -52,7 +52,7 @@ const upload = multer({
 usuario.get("/usuario/login", loginUsuario);
 
 usuario.get("/usuario/profile", imagenUsuario);
-usuario.put("/usuario/edit", editarUsaurio);
+usuario.put("/usuario/edit",upload.single('photo'), editarUsaurio);
 usuario.post("/usuario/create",upload.single('photo'), crearUsuario);
 usuario.delete("/usuario/delete", eliminarUsuario);
 
