@@ -1,17 +1,15 @@
 import { Router } from "express";
 import {
-  listarcomentario,
-  editarcomentario,
-  crearcomentario,
-  eliminarcomentario,
-  listarporpublicacion
+  crearComentario,
+  editarComentario,
+  eliminarComentario,
+  listarporPublicacion
 } from "../controllers/comentario.js";
 const comentario = Router();
 
-comentario.get("/comentario/listing", listarcomentario);
-comentario.get("/comentario/listingpub", listarporpublicacion);
-comentario.put("/comentario/edit", editarcomentario);
-comentario.post("/comentario/create", crearcomentario);
-comentario.delete("/comentario/delete", eliminarcomentario);
+comentario.get("/comentario/listingPID", listarporPublicacion);
+comentario.put("/comentario/edit", editarComentario);
+comentario.post("/comentario/create", crearComentario);
+comentario.delete("/comentario/delete", eliminarComentario);
 
 export default comentario;

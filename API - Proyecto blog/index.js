@@ -1,11 +1,13 @@
 import express from "express";
 
-import rutaempleado from "./src/routes/empleado.js";
-import rutadepartamento from "./src/routes/departamento.js";
+
 import rutausuario from "./src/routes/usuario.js";
+import rutacomentario from "./src/routes/comentario.js";
+import rutapublicacion from "./src/routes/publicacion.js";
 import cnx from "./src/models/db.js";
 
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 dotenv.config({ path: "././.env" });
 
 //creamos el server node
@@ -14,6 +16,7 @@ const port = process.env.PORT || 3100;
 //app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 cnx
   .sync({ force: false })
@@ -24,9 +27,9 @@ cnx
     console.log(error);
   });
 
-app.use(rutadepartamento);
-app.use(rutaempleado);
+app.use(rutacomentario);
 app.use(rutausuario);
+app.use(rutapublicacion);
 app.server = app.listen(port, () => {
   console.log(`Server ejecutandose en ${port}...`);
 });

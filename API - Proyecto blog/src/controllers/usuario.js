@@ -1,8 +1,9 @@
 import { where } from "sequelize";
 import Usuario from "../models/usuario.js";
 import bcrypt, { compare } from "bcrypt";
+import multer from "multer";
 
-export const loginusuario = async (req, res) => {
+export const loginUsuario = async (req, res) => {
   const { password, email } = req.body;
   let Error = "";
   const usuario = await Usuario.findAll({
@@ -39,11 +40,37 @@ export const loginusuario = async (req, res) => {
   }
 };
 
-export const crearusuario = async (req, res) => {
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    // Set your desired destination folder
+    cb(null, '/uploads');
+  },
+  filename: function (req, file, cb) {
+    // Customize the filename (e.g., add timestamp or original name)
+    cb(null, file.fieldname + '-' + Date.now());
+  }
+});
+
+const upload = multer({ storage: storage }).single('file');
+
+
+
+
+export const crearUsuario = async (req, res) => {
+  const formData = req.body
+
+  upload(req, res, function (err){
+
+    console.log(File.name)
+  })
+
+
+
   let val1 = false;
   let val2 = false;
   let mensaje1 = "";
   let mensaje2 = "";
+
   const { user, password, email, photo } = req.body;
   //Encriptar contraseña y validar que no se ha utilizado el email
   let salt = 10;
@@ -107,7 +134,7 @@ export const crearusuario = async (req, res) => {
   }
 };
 
-export const editarusaurio = async (req, res) => {
+export const editarUsaurio = async (req, res) => {
   const { user, password, email, photo } = req.body;
   let salt = 10;
   //Encriptar contraseña y validar que no se ha utilizado el email
@@ -142,7 +169,7 @@ export const editarusaurio = async (req, res) => {
   }
 };
 
-export const eliminarusuario = async (req, res) => {
+export const eliminarUsuario = async (req, res) => {
   const usuario = await Usuario.findByPk(req.query.id);
 
   if (usuario) {

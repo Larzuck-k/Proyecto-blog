@@ -1,15 +1,15 @@
 import { Router } from "express";
 import {
-  listarpublicacion,
-  editarpublicacion,
-  crearpublicacion,
-  eliminarpublicacion
-} from "../controllers/usuario.js";
+  listarPublicaciones,
+  editarPublicacion,
+  crearPublicacion,
+  eliminarPublicacion
+} from "../controllers/publicacion.js";
 const publicacion = Router();
 
-usuario.get("/publicacion/listing", listarpublicacion);
-usuario.put("/publicacion/edit", editarpublicacion);
-usuario.post("/publicacion/create", crearpublicacion);
-usuario.delete("/publicacion/delete", eliminarpublicacion);
+publicacion.get("/publicacion/listing", listarPublicaciones);
+publicacion.put("/publicacion/edit", editarPublicacion);
+publicacion.post("/publicacion/create", crearPublicacion);
+publicacion.delete("/publicacion/delete", eliminarPublicacion);
 
 export default publicacion;

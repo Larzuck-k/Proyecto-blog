@@ -1,17 +1,21 @@
 import { Router } from "express";
+import Multer from "multer";
+
 import {
   
-  loginusuario,
-  editarusaurio,
-  crearusuario,
-  eliminarusuario
+  loginUsuario,
+  editarUsaurio,
+  crearUsuario,
+  eliminarUsuario
 } from "../controllers/usuario.js";
 const usuario = Router();
+const upload = Multer({ dest: 'uploads/'
+}); 
 
+usuario.get("/usuario/login", loginUsuario);
+usuario.put("/usuario/edit", editarUsaurio);
+usuario.post("/usuario/create", crearUsuario);
+usuario.delete("/usuario/delete", eliminarUsuario);
 
-usuario.get("/usuario/login", loginusuario);
-usuario.put("/usuario/edit", editarusaurio);
-usuario.post("/usuario/create", crearusuario);
-usuario.delete("/usuario/delete", eliminarusuario);
 
 export default usuario;
