@@ -6,17 +6,17 @@ import rutacomentario from "./src/routes/comentario.js";
 import rutapublicacion from "./src/routes/publicacion.js";
 import cnx from "./src/models/db.js";
 
+import bodyparser from "body-parser";
+
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
+
 dotenv.config({ path: "././.env" });
 
 //creamos el server node
 const app = express();
 const port = process.env.PORT || 3100;
 //app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 cnx
   .sync({ force: false })
@@ -27,6 +27,9 @@ cnx
     console.log(error);
   });
 
+
+  app.use(bodyparser.urlencoded({extended: true}));
+  app.use(bodyparser.json());
 app.use(rutacomentario);
 app.use(rutausuario);
 app.use(rutapublicacion);
